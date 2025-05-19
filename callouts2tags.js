@@ -1,7 +1,7 @@
 // scripts/obsidian-callout-to-fluid.js（需要放在项目根目录的scripts目录中）
 
 //const pattern = /^> \[!([^\]]+)\](?: (.*))?\n((?:> .*(\n|$))*)/gm;
-const pattern = /> ?\[!(\w*)\](-|\+)? (.*)\n(>? ?(.*\n))*?\n/gm
+const pattern = /> ?\[!(\w*)\](-|\+)? (.*)\n((>? ?(.+\n))*?)(\s*)\n/gm
 
 hexo.extend.filter.register('before_post_render', function (data) {
   data.content = data.content.replace(pattern, (match, type, foldtype, title, content) => {
@@ -28,9 +28,9 @@ hexo.extend.filter.register('before_post_render', function (data) {
 
     const finalType = typeMap[type.toLowerCase()] || type.toLowerCase();
     if (foldtype == '+' || foldtype == '-') {
-      return `{% fold ${finalType} @${titlePart} %}\n${processedContent}\n{% endfold %}`;
+      return `{% fold ${finalType} @${type.toUpperCase()} ${titlePart} %}\n${processedContent}\n{% endfold %}\n`;
     }
-    return `{% note ${finalType} @${titlePart} %}\n${processedContent}\n{% endnote %}`;
+    return `{% note ${finalType} %}\n **${type.toUpperCase()}** ${titlePart}   \n${processedContent}\n{% endnote %}\n`;
   });
 
   return data;
