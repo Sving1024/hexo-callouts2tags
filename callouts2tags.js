@@ -30,7 +30,7 @@ hexo.extend.filter.register('before_post_render', function (data) {
     if (foldtype == '+' || foldtype == '-') {
       return `{% fold ${finalType} @${type.toUpperCase()} ${titlePart} %}\n${processedContent}\n{% endfold %}\n`;
     }
-    return `{% note ${finalType} %}\n **${type.toUpperCase()}** ${titlePart}   \n${processedContent}\n{% endnote %}\n`;
+    return `{% note ${finalType} %}\n**${type.toUpperCase()}** ${titlePart}   \n${processedContent}\n{% endnote %}\n`;
   });
 
   return data;
