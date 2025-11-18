@@ -1,4 +1,3 @@
-//const pattern = /^> \[!([^\]]+)\](?: (.*))?\n((?:> .*(\n|$))*)/gm;
 const pattern = /> ?\[!(\w*)\](-|\+)? ?(.*)\n((>? ?(.+\n))*?)(\s*)\n/gm
 
 hexo.extend.filter.register('before_post_render', function (data) {
@@ -33,4 +32,3 @@ hexo.extend.filter.register('before_post_render', function (data) {
 
     return data;
 });
-
